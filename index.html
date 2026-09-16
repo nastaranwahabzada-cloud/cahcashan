@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کهکشان و زمین</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    font-family:Tahoma,"Segoe UI",sans-serif;
+    background:#050511;
+    color:#fff;
+}
+.navbar{
+    background:rgba(5,5,17,.78)!important;
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+.navbar-brand,.nav-link{color:#fff!important}
+.nav-link{opacity:.72;transition:.3s}
+.nav-link:hover{opacity:1;transform:translateY(-2px)}
+.hero{
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 20% 25%,rgba(91,73,180,.35),transparent 30%),
+      radial-gradient(circle at 80% 70%,rgba(36,130,190,.25),transparent 30%),
+      #050511;
+}
+.hero h1{
+    font-size:clamp(3.4rem,8vw,7rem);
+    line-height:1.1;
+    font-weight:900;
+    letter-spacing:-.05em;
+}
+.hero h1 span{color:#a99cff}
+.hero p{
+    color:#b9b9c7;
+    line-height:2;
+    max-width:600px;
+    font-size:1.05rem;
+}
+.btn-space{
+    border:0;
+    border-radius:999px;
+    padding:13px 28px;
+    background:#fff;
+    color:#090914;
+    transition:.35s;
+}
+.btn-space:hover{
+    transform:translateY(-4px);
+    background:#b9b0ff;
+    box-shadow:0 15px 40px rgba(145,125,255,.3);
+}
+.earth-wrap{
+    perspective:1000px;
+    display:flex;
+    justify-content:center;
+    padding:35px;
+}
+.earth{
+    width:min(440px,82vw);
+    aspect-ratio:1;
+    object-fit:cover;
+    border-radius:50%;
+    transform:rotateY(-12deg) rotateX(4deg);
+    transition:.7s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 0 80px rgba(61,143,255,.32),0 35px 70px rgba(0,0,0,.6);
+}
+.earth-wrap:hover .earth{
+    transform:rotateY(8deg) rotateX(0) scale(1.07);
+    box-shadow:0 0 110px rgba(93,153,255,.5),0 45px 80px rgba(0,0,0,.65);
+}
+.info-strip{
+    background:#0d0d1c;
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.info{
+    padding:30px 10px;
+    text-align:center;
+    transition:.3s;
+}
+.info:hover{transform:translateY(-5px)}
+.info strong{display:block;font-size:1.2rem}
+.info small{color:#89899a}
+.section{
+    padding:110px 0;
+    background:#f4f4f7;
+    color:#101018;
+}
+.title{
+    font-size:clamp(2.5rem,5vw,5rem);
+    font-weight:900;
+    letter-spacing:-.05em;
+}
+.subtitle{
+    color:#656571;
+    line-height:2;
+    max-width:700px;
+}
+.card-space{
+    position:relative;
+    overflow:hidden;
+    border:0;
+    border-radius:30px;
+    min-height:470px;
+    background:#e7e7ec;
+    transition:.45s;
+}
+.card-space:hover{
+    transform:translateY(-12px);
+    box-shadow:0 30px 65px rgba(0,0,0,.18);
+}
+.card-space img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    transition:.6s cubic-bezier(.2,.8,.2,1);
+}
+.card-space:hover img{
+    transform:scale(1.1);
+    filter:saturate(1.2);
+}
+.card-text{padding:28px}
+.card-text h3{font-weight:800}
+.card-text p{color:#686872;line-height:1.9}
+.dark-section{
+    padding:110px 0;
+    background:#050511;
+}
+.feature-box{
+    height:100%;
+    padding:32px;
+    border-radius:28px;
+    background:linear-gradient(145deg,#151526,#0d0d18);
+    border:1px solid rgba(255,255,255,.1);
+    transition:.4s;
+}
+.feature-box:hover{
+    transform:translateY(-8px);
+    border-color:#8d7cff;
+    box-shadow:0 25px 60px rgba(0,0,0,.4);
+}
+.number{
+    font-size:2.8rem;
+    font-weight:900;
+    color:#aaa0ff;
+}
+.feature-box p{color:#9898a8;line-height:1.9}
+.gallery{
+    margin-top:65px;
+    min-height:520px;
+    border-radius:35px;
+    overflow:hidden;
+    position:relative;
+    background:
+      linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.05)),
+      url("https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=1800&q=85")
+      center/cover;
+    transition:.5s;
+}
+.gallery:hover{transform:scale(1.015)}
+.gallery-text{
+    position:absolute;
+    right:50px;
+    bottom:45px;
+    max-width:650px;
+}
+.gallery-text h2{
+    font-size:clamp(2.5rem,5vw,5rem);
+    font-weight:900;
+}
+.gallery-text p{color:#ddd;line-height:2}
+footer{
+    background:#020208;
+    color:#696976;
+    text-align:center;
+    padding:35px 0;
+}
+@media(max-width:767px){
+    .hero{padding:90px 0 50px}
+    .earth-wrap{padding:20px}
+    .earth{transform:none}
+    .section,.dark-section{padding:80px 0}
+    .card-space{margin-bottom:20px}
+    .gallery-text{right:25px;bottom:25px;left:25px}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+<div class="container py-2">
+<a class="navbar-brand fw-bold" href="#">زمین <span style="color:#a99cff">و</span> کهکشان</a>
+<button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav mx-auto">
+<li class="nav-item"><a class="nav-link px-3" href="#home">خانه</a></li>
+<li class="nav-item"><a class="nav-link px-3" href="#earth">زمین</a></li>
+<li class="nav-item"><a class="nav-link px-3" href="#galaxy">کهکشان</a></li>
+<li class="nav-item"><a class="nav-link px-3" href="#discover">کشف جهان</a></li>
+</ul>
+<a href="#discover" class="btn btn-light rounded-pill px-4">شروع کاوش</a>
+</div>
+</div>
+</nav>
+
+<section class="hero" id="home">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-6">
+<div class="small mb-3" style="color:#aaa0ff;letter-spacing:.12em">سفری از خانه تا بی‌نهایت</div>
+<h1>زمین در دل<br><span>کهکشان.</span></h1>
+<p>
+زمین تنها یک نقطه‌ی کوچک در پهنه‌ی عظیم کیهان است؛
+اما همین نقطه، خانه‌ی ماست. در این صفحه با زمین،
+کهکشان‌ها، ستارگان و شگفتی‌های جهان آشنا می‌شویم.
+</p>
+<a href="#earth" class="btn btn-space">سفر را آغاز کن ←</a>
+</div>
+<div class="col-lg-6">
+<div class="earth-wrap">
+<img class="earth"
+src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=1000&q=90"
+alt="زمین از فضا">
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="info-strip">
+<div class="container">
+<div class="row">
+<div class="col-6 col-lg-3 info"><strong>🌍 زمین</strong><small>خانه‌ی ما در کیهان</small></div>
+<div class="col-6 col-lg-3 info"><strong>☀️ خورشید</strong><small>ستاره‌ی منظومه‌ی ما</small></div>
+<div class="col-6 col-lg-3 info"><strong>🌌 راه شیری</strong><small>کهکشان محل زندگی ما</small></div>
+<div class="col-6 col-lg-3 info"><strong>✨ ستارگان</strong><small>چراغ‌های دوردست آسمان</small></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="earth">
+<div class="container">
+<div class="mb-5">
+<div class="small mb-3" style="letter-spacing:.12em;color:#777">سیاره‌ی آبی</div>
+<h2 class="title">زمین؛ خانه‌ای در میان ستاره‌ها</h2>
+<p class="subtitle">
+زمین سومین سیاره از خورشید و تنها جهانی است که تاکنون وجود حیات در آن به‌طور قطعی شناخته شده است.
+اقیانوس‌ها، قاره‌ها و جو زمین، منظره‌ای منحصربه‌فرد در منظومه‌ی شمسی ساخته‌اند.
+</p>
+</div>
+
+<div class="row g-4">
+<div class="col-lg-6">
+<div class="card-space">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85" alt="طبیعت زمین">
+<div class="card-text">
+<h3>سیاره‌ای زنده و پویا</h3>
+<p>از کوهستان‌های بلند تا اقیانوس‌های عمیق، زمین سرشار از تنوع و تغییر است.</p>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="card-space">
+<img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85" alt="آسمان پرستاره">
+<div class="card-text">
+<h3>نگاهی به آسمان</h3>
+<p>هر بار که به آسمان شب نگاه می‌کنیم، بخشی از داستان بزرگ‌تر کیهان را می‌بینیم.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="dark-section" id="galaxy">
+<div class="container">
+<div class="text-center mb-5">
+<div class="small mb-3" style="color:#aaa0ff;letter-spacing:.12em">فراتر از زمین</div>
+<h2 class="title text-white">کهکشان؛ شهر عظیم ستارگان</h2>
+<p class="subtitle mx-auto text-white-50">
+کهکشان‌ها مجموعه‌هایی عظیم از ستارگان، گاز، غبار و ماده‌ی تاریک هستند.
+ما در کهکشان راه شیری زندگی می‌کنیم؛ کهکشانی که خورشید و منظومه‌ی شمسی در آن قرار دارند.
+</p>
+</div>
+
+<div class="row g-4" id="discover">
+<div class="col-md-4">
+<div class="feature-box">
+<div class="number">۰۱</div>
+<h4>راه شیری</h4>
+<p>کهکشان خانه‌ی منظومه‌ی شمسی است و ساختاری مارپیچی دارد.</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="number">۰۲</div>
+<h4>ستارگان</h4>
+<p>ستارگان اجرامی بسیار داغ و درخشان‌اند که در فاصله‌های بسیار دور از ما قرار دارند.</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="number">۰۳</div>
+<h4>پرسش‌های بی‌پایان</h4>
+<p>کیهان هنوز رازهای فراوانی دارد و هر کشف تازه، سؤال‌های تازه‌ای به وجود می‌آورد.</p>
+</div>
+</div>
+</div>
+
+<div class="gallery">
+<div class="gallery-text">
+<div class="small mb-3" style="color:#c2baff">فراتر از افق</div>
+<h2>جهان، بزرگ‌تر از تصور ماست.</h2>
+<p>
+از سیاره‌ی کوچک خودمان تا کهکشان‌های دوردست،
+هر گوشه‌ی آسمان یادآور این است که هنوز چیزهای زیادی برای کشف کردن وجود دارد.
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p class="mb-0">© ۲۰۲۶ — زمین و کهکشان | سفری کوتاه در پهنه‌ی کیهان</p>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
